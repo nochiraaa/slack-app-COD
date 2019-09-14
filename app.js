@@ -16,12 +16,7 @@ app.message('COD', ({ message, say }) => {
           'type': 'mrkdwn',
           'text': 'Thank you! This app is starting.\nChoose Cat Or Dog!'
         }
-      }
-    ]
-  });
-
-  say({
-    blocks: [
+      },
       {
         'type': 'actions',
         "elements": [
@@ -52,19 +47,44 @@ app.message('COD', ({ message, say }) => {
 app.action('cat', ({ body, ack, say }) => {
   // Acknowledge the action
   ack();
-  say('https://http.cat/200');
+  say({
+    blocks: [
+      {
+        "type": "image",
+        "title": {
+          "type": "plain_text",
+          "text": "Cat",
+          "emoji": true
+        },
+        "image_url": "https://http.cat/200",
+        "alt_text": "Cat"
+      }
+    ]
+  });
 });
 
 app.action('dog', ({ body, ack, say }) => {
   // Acknowledge the action
   ack();
-  say('https://httpstatusdogs.com/200-ok');
+  say({
+    blocks: [
+      {
+        "type": "image",
+        "title": {
+          "type": "plain_text",
+          "text": "Cat",
+          "emoji": true
+        },
+        "image_url": "https://httpstatusdogs.com/img/200.jpg",
+        "alt_text": "Cat"
+      }
+    ]
+  });
 });
 
 
 (async () => {
   // Start your app
   await app.start(process.env.PORT || 3000);
-
   console.log('⚡️ Bolt app is running!');
 })();
